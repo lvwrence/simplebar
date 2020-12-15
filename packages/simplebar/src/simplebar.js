@@ -52,7 +52,6 @@ export default class SimpleBar {
       return;
     }
 
-    this.recalculate = throttle(this.recalculate.bind(this), 64);
     this.onMouseMove = throttle(this.onMouseMove.bind(this), 64);
     this.hideScrollbars = debounce(
       this.hideScrollbars.bind(this),
@@ -305,7 +304,9 @@ export default class SimpleBar {
     const resizeObserver = elWindow.ResizeObserver || ResizeObserver;
     this.resizeObserver = new resizeObserver(() => {
       if (!resizeObserverStarted) return;
-      this.recalculate();
+      elWindow.requestAnimationFrame(() => {
+        this.recalculate();
+      });
     });
 
     this.resizeObserver.observe(this.el);
@@ -316,7 +317,11 @@ export default class SimpleBar {
     });
 
     // This is required to detect horizontal scroll. Vertical scroll only needs the resizeObserver.
-    this.mutationObserver = new elWindow.MutationObserver(this.recalculate);
+    this.mutationObserver = new elWindow.MutationObserver(() => {
+      elWindow.requestAnimationFrame(() => {
+        this.recalculate();
+      });
+    });
 
     this.mutationObserver.observe(this.contentEl, {
       childList: true,
@@ -897,7 +902,6 @@ export default class SimpleBar {
     }
 
     // Cancel all debounced functions
-    this.recalculate.cancel();
     this.onMouseMove.cancel();
     this.hideScrollbars.cancel();
     this.onWindowResize.cancel();
