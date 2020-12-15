@@ -1,6 +1,6 @@
 {
   "version": "5.3.2-patch.0",
-  "name": "simplebar",
+  "name": "simplebar-patch",
   "title": "SimpleBar.js",
   "description": "Scrollbars, simpler.",
   "files": [
@@ -52,5 +52,6 @@
       "prettier-eslint --write",
       "git add"
     ]
-  }
+  },
+  "gitHead": "e415b4535f853535f8818a60dee9b989a35eb0b6"
 }
