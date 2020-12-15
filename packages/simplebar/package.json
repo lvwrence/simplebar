@@ -1,5 +1,5 @@
 {
-  "version": "5.3.2-patch.1",
+  "version": "5.3.2-patch.2",
   "name": "simplebar-patch",
   "title": "SimpleBar.js",
   "description": "Scrollbars, simpler.",
@@ -22,7 +22,7 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --mode=development",
-    "build": "rollup -c && cp src/simplebar.css dist/simplebar.css && minify dist/simplebar.css > dist/simplebar.min.css && webpack --mode=production",
+    "build": "rollup -c && cp src/simplebar.css dist/simplebar.css && minify dist/simplebar.css > dist/simplebar.min.css",
     "dev": "rollup -c -w",
     "test": "yarn test:unit && yarn test:e2e",
     "test:unit": "jest -c jest-unit.config.js",
